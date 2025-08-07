@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs Postados</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
+
+        body {
+            background: linear-gradient(120deg, #232526 0%, #0f2027 100%);
+            font-family: 'UnifrakturCook', 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #111;
+            color: #e94560;
+            padding: 24px 0;
+            text-align: center;
+            font-size: 2em;
+            letter-spacing: 2px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(30, 60, 90, 0.25);
+            font-family: 'UnifrakturCook', serif;
+            text-shadow: 2px 2px 8px #000, 0 0 10px #e94560;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto 0 auto;
+            background: #18181a;
+            border-radius: 14px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+            padding: 40px 32px;
+        }
+        h1 {
+            text-align: center;
+            color: #e94560;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            font-family: 'UnifrakturCook', serif;
+            text-shadow: 1px 1px 8px #000, 0 0 6px #e94560;
+        }
+        .posts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        .post-block {
+            background: #232526;
+            border: 1.5px solid #393e46;
+            border-radius: 10px;
+            box-shadow: 0 2px 16px rgba(233, 69, 96, 0.08), 0 0 0 2px #0f2027 inset;
+            padding: 28px 24px;
+            transition: box-shadow 0.2s, border 0.2s;
+        }
+        .post-block:hover {
+            box-shadow: 0 6px 24px rgba(233, 69, 96, 0.18), 0 0 0 2px #e94560 inset;
+            border: 1.5px solid #e94560;
+        }
+        .post-title {
+            color: #e94560;
+            margin: 0 0 10px 0;
+            font-size: 1.6em;
+            font-weight: 600;
+            font-family: 'UnifrakturCook', serif;
+            text-shadow: 1px 1px 8px #000, 0 0 6px #e94560;
+        }
+        .post-content {
+            color: #f5f5f5;
+            margin-bottom: 18px;
+            font-size: 1.08em;
+            line-height: 1.6;
+            font-family: 'UnifrakturCook', serif;
+            text-shadow: 0 0 4px #000;
+        }
+        .post-date {
+            color: #888;
+            font-size: 0.97em;
+            text-align: right;
+            font-family: 'UnifrakturCook', serif;
+        }
+        .no-posts {
+            text-align: center;
+            color: #888;
+            padding: 40px 0;
+            font-size: 1.2em;
+            font-family: 'UnifrakturCook', serif;
+        }
+        footer {
+            background: #111;
+            color: #e94560;
+            text-align: center;
+            padding: 18px 0;
+            margin-top: 40px;
+            font-size: 1em;
+            letter-spacing: 1px;
+            border-radius: 0 0 14px 14px;
+            font-family: 'UnifrakturCook', serif;
+            text-shadow: 1px 1px 8px #000, 0 0 6px #e94560;
+        }
+        img {
+            filter: grayscale(30%) brightness(80%) contrast(120%);
+            box-shadow: 0 4px 24px #000, 0 0 8px #e94560;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Meu Blog Django
+    </header>
+    <div class="container">
+        <h1>Blog Posts</h1>
+        <div class="posts-list">
+            {% for post in posts %}
+                <div class="post-block">
+                    {% if post.image %}
+                        <div style="text-align:center;">
+                            <img src="{{ post.image.url }}" alt="Imagem do post" style="max-width:100%; max-height:300px; border-radius:8px; margin-bottom:16px;">
+                        </div>
+                    {% endif %}
+                    <div class="post-title">{{ post.title }}</div>
+                    <div class="post-content">{{ post.content }}</div>
+                    <div class="post-date"><em>Publicado em: {{ post.created_at|date:"d/m/Y H:i" }}</em></div>
+                </div>
+            {% empty %}
+                <div class="no-posts">Nenhum post disponível.</div>
+            {% endfor %}
+        </div>
+    </div>
+    <footer>
+        &copy; {{ now|date:"Y" }} Meu Blog Django. Todos os direitos reservados.
