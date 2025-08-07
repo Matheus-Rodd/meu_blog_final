@@ -89,4 +89,4 @@ Este projeto é livre para fins de estudo e aprendizado.
 
 ---
 
-Desenvolvido com 💻 por
+Desenvolvido com 💻 por Matheus Rodrigues
